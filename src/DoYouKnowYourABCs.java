@@ -12,17 +12,11 @@ public class DoYouKnowYourABCs {
 		for (int i = 0; i <= 6; i++) {
 			in[i] = sc.nextInt();
 		}
+		System.out.println(ABCs(in));
 
-		Integer[] out = ABCs(in);
-		for (int i = 0; i < out.length; i++) {
-			System.out.print(out[i]);
-			if (i < out.length - 1)
-				System.out.print(" ");
-		}
-		System.out.println();
 	}
 
-	public static Integer[] ABCs(Integer[] nums) {
+	public static String ABCs(Integer[] nums) {
 		Arrays.sort(nums);
 		int a = nums[0];
 
@@ -40,7 +34,26 @@ public class DoYouKnowYourABCs {
 				}
 			}
 		}
-		Integer[] list = { a, b, c };
-		return list;
+		return "" + a + " " + b + " " + c;
+	}
+
+	public static String ABCsV2(Integer[] nums) {
+		Arrays.sort(nums);
+		int a = nums[0];
+		int b = nums[1];
+		int c = nums[6] - a - b; // largest number is a+b+c
+
+		return "" + a + " " + b + " " + c;
+
+	}
+
+	public static String ABCsV3(Integer[] nums) {
+		Arrays.sort(nums);
+		int a = nums[0];
+		int b = nums[1];
+		int c = nums[5] - b; // second largest number is b+c
+
+		return "" + a + " " + b + " " + c;
+
 	}
 }
