@@ -1,3 +1,5 @@
+// http://www.usaco.org/index.php?page=viewproblem2&cpid=665
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
