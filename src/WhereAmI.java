@@ -10,7 +10,6 @@ import java.util.Scanner;
 public class WhereAmI {
 
 	public static void main(String[] args) throws IOException {
-		// File in = new File("src\\whereami.in");
 		File in = new File("whereami.in");
 
 		PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("whereami.out")));

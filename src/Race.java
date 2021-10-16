@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Race {
     public static void main(String[] args) throws IOException {
-        File in = new File("src//race.in");
+        File in = new File("race.in");
 
         PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("src//race.out")));
 

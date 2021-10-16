@@ -10,7 +10,6 @@ import java.util.Scanner;
 public class CowSignal {
 
 	public static void main(String[] args) throws IOException {
-		// File in = new File("src\\cowsignal.in");
 		File in = new File("cowsignal.in");
 
 		PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("cowsignal.out")));
