@@ -1,3 +1,5 @@
+// http://usaco.org/index.php?page=viewproblem2&cpid=1060
+
 import java.util.Scanner;
 
 public class DaisyChains {
@@ -33,7 +35,9 @@ public class DaisyChains {
     public static boolean hasAverage(int i, int j, int[] p, int sum) {
         boolean hasAve = false;
         for (int k = i; k <= j; k++) {
-            if (p[k] * (j-i+1) == sum) { // x * (length of subarray) = (sum of subarray) [akin to seeing if ave is in subarray]
+            // x * (length of subarray) = (sum of subarray) [akin to seeing if ave is in subarray]
+            // do not just search for actual average to avoid dealing with non-integer averages
+            if (p[k] * (j-i+1) == sum) {
                 hasAve = true;
                 break;
             }

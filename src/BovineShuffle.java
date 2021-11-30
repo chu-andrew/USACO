@@ -1,7 +1,6 @@
 // http://www.usaco.org/index.php?page=viewproblem2&cpid=760
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BovineShuffle {
@@ -12,34 +11,40 @@ public class BovineShuffle {
 
         int N = sc.nextInt();
 
-        ArrayList<Integer> order = new ArrayList<>();
+        int[] order = new int[N];
         for (int i = 0; i < N; i++) {
-            order.add(sc.nextInt());
-        }
-        System.out.println(order);
-        ArrayList<Integer> oldOrder = new ArrayList<>();
-
-        for (int j = 0; j < 3; j++) {
-            for (int i = 0; i < N; i++) {
-                oldOrder.add(order.indexOf(i + 1) + 1);
-            }
-
-            System.out.println(oldOrder);
-
-            order = new ArrayList<>(oldOrder);
-            if (j != 2) oldOrder.clear();
+            order[i] = sc.nextInt();
         }
 
-        ArrayList<Integer> ID = new ArrayList<>();
+        int[] id = new int[N];
         for (int i = 0; i < N; i++) {
-            ID.add(sc.nextInt());
+            id[i] = sc.nextInt();
         }
 
-        for (int i = 0; i < N; i++) {
-            out.println(ID.get(oldOrder.get(i) - 1));
+        int[] oldID = shuffle(N, order, id); // first loop
+        for (int i = 0; i < 2; i++) { //other 2 loops
+            oldID = shuffle(N, order, oldID);
+        }
+
+        for (int x : oldID) {
+            out.println(x);
         }
 
         sc.close();
         out.close();
+    }
+
+    public static int[] shuffle(int N, int[] order, int[] id) {
+        int[] oldID = new int[N];
+        for (int i = 0; i < order.length; i++) {
+            // init position is the index of order
+            // final position is the number at that index
+
+            // int initPos = i;
+            int finalPos = order[i];
+
+            oldID[i] = id[finalPos - 1]; // 1-indexed input
+        }
+        return oldID;
     }
 }
