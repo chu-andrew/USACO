@@ -17,83 +17,81 @@ public class LoadBalancing {
             grid[x][y] = true;
         }
 
-        // x
-        int[] colSum = new int[B];
-        for (int r = 0; r < B; r++) {
-            for (int c = 0; c < B; c++) {
-                if (grid[r][c]) colSum[c]++;
+        //TODO try to optimize time by checking biggest area of grid first, then smaller ones when passed
+
+        int M = N + 1;
+        for (int a = 0; a < B; a += 2) {
+            for (int b = 0; b < B; b += 2) {
+                //top left
+                int q1 = 0;
+                for (int r = 1; r < b; r += 2) {
+                    for (int c = 1; c < a; c += 2) {
+                        if (grid[r][c]) q1++;
+                    }
+                }
+                if (q1 > M) continue;
+
+                //top right
+                int q2 = 0;
+                for (int r = 1; r < b; r += 2) {
+                    for (int c = a + 1; c < B; c += 2) {
+                        if (grid[r][c]) q2++;
+                    }
+                }
+                if (q2 > M) continue;
+
+                //bottom left
+                int q3 = 0;
+                for (int r = b + 1; r < B; r += 2) {
+                    for (int c = 1; c < a; c += 2) {
+                        if (grid[r][c]) q3++;
+                    }
+                }
+                if (q3 > M) continue;
+
+                //bottom right
+                int q4 = 0;
+                for (int r = b + 1; r < B; r += 2) {
+                    for (int c = a + 1; c < B; c += 2) {
+                        if (grid[r][c]) q4++;
+                    }
+                }
+                if (q4 > M) continue;
+
+                // System.out.printf("a:%d, b:%d, q: %d,%d,%d,%d%n", a, b, q1, q2, q3, q4);
+                int maxM = Math.max(Math.max(q1, q2), Math.max(q3, q4));
+                M = Math.min(maxM, M);
             }
         }
-        int a = findMinA(colSum, B);
 
-        // y
-        int[] rowSum = new int[B];
-        for (int i = 0; i < B; i++) {
-            boolean[] row = grid[i];
-            for (boolean x : row) {
-                if (x) rowSum[i]++;
-            }
-        }
-        int b = findMinA(rowSum, B);
-
-        // System.out.println(a);
-        // System.out.println(b);
-
-        int sum1 = sumQuadrant(grid, a, b, B, 1);
-        int sum2 = sumQuadrant(grid, a, b, B, 2);
-        int sum3 = sumQuadrant(grid, a, b, B, 3);
-        int sum4 = sumQuadrant(grid, a, b, B, 4);
-
-        int M = Math.max(Math.max(sum1, sum2), Math.max(sum3, sum4));
         out.println(M);
 
         sc.close();
         out.close();
     }
-
-    public static int sumSubArray(int[] arr, int j, int k) {
-        int sum = 0;
-        for (int i = j; i < k; i++) {
-            sum += arr[i];
-        }
-        return sum;
-    }
-
-    public static int findMinA(int[] rowSum, int B) {
-        int a = B;
-        int minDiff = 100000;
-        for (int i = 0; i < B; i += 2) {
-            int sideDiff = Math.abs(sumSubArray(rowSum, 0, i) - sumSubArray(rowSum, i, B));
-            if (sideDiff <= minDiff) {
-                a = i;
-                minDiff = sideDiff;
-            }
-        }
-        return a;
-    }
-
+    /*
     public static int sumQuadrant(boolean[][] grid, int a, int b, int B, int q) {
         switch (q) {
             case (1): //top left
                 int sum1 = 0;
-                for (int r = 0; r < b; r++) {
-                    for (int c = 0; c < a; c++) {
+                for (int r = 1; r < b; r += 2) {
+                    for (int c = 1; c < a; c += 2) {
                         if (grid[r][c]) sum1++;
                     }
                 }
                 return sum1;
             case (2): //top right
                 int sum2 = 0;
-                for (int r = 0; r < b; r++) {
-                    for (int c = a; c < B; c++) {
+                for (int r = 1; r < b; r += 2) {
+                    for (int c = a + 1; c < B; c += 2) {
                         if (grid[r][c]) sum2++;
                     }
                 }
                 return sum2;
             case (3): //bottom left
                 int sum3 = 0;
-                for (int r = b; r < B; r++) {
-                    for (int c = 0; c < a; c++) {
+                for (int r = b + 1; r < B; r += 2) {
+                    for (int c = 1; c < a; c += 2) {
                         if (grid[r][c]) sum3++;
                     }
                 }
@@ -101,8 +99,8 @@ public class LoadBalancing {
 
             case (4): //bottom right
                 int sum4 = 0;
-                for (int r = b; r < B; r++) {
-                    for (int c = a; c < B; c++) {
+                for (int r = b + 1; r < B; r += 2) {
+                    for (int c = a + 1; c < B; c += 2) {
                         if (grid[r][c]) sum4++;
                     }
                 }
@@ -110,6 +108,6 @@ public class LoadBalancing {
         }
         return 0;
     }
-
+    */
 
 }
