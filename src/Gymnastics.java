@@ -1,3 +1,5 @@
+// http://www.usaco.org/index.php?page=viewproblem2&cpid=963
+
 import java.io.*;
 import java.util.Scanner;
 
