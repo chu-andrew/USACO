@@ -3,3 +3,7 @@ Race
 StuckInARut
 EvenMoreOddPhotos
 YearOfTheCow
+
+LonelyPhoto
+WalkingHome
+AirCownditioning

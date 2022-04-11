@@ -10,6 +10,7 @@ public class LonelyPhoto {
         String s = sc.next();
         sc.close();
 
+        // O(N^2) solution
         long sum = 0;
 
         for (int i = 0; i < N; i++) {
